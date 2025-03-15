@@ -1,0 +1,11 @@
+[versions]
+kotlin = "2.0.20"
+kotlinBenchmark = "0.4.13"
+
+[libraries]
+kotlinBenchmarkRuntime = { module = "org.jetbrains.kotlinx:kotlinx-benchmark-runtime", version.ref = "kotlinBenchmark" }
+
+[plugins]
+kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+kotlinAllOpen = { id = "org.jetbrains.kotlin.plugin.allopen", version.ref = "kotlin"}
+kotlinBenchmark = { id = "org.jetbrains.kotlinx.benchmark", version.ref = "kotlinBenchmark"}
