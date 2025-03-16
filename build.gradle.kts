@@ -1,5 +1,7 @@
-import kotlinx.benchmark.gradle.JsBenchmarkTarget
-import kotlinx.benchmark.gradle.JsBenchmarksExecutor
+/**
+ * import kotlinx.benchmark.gradle.JsBenchmarkTarget
+ * import kotlinx.benchmark.gradle.JsBenchmarksExecutor
+*/
 import kotlinx.benchmark.gradle.JvmBenchmarkTarget
 
 plugins {
@@ -22,8 +24,10 @@ kotlin {
     }
     js {
         nodejs()
+        /**
         compilations.create("defaultExecutor").associateWith(compilations["main"])
         compilations.create("builtInExecutor").associateWith(compilations["main"])
+        */
     }
 
     @OptIn(org.jetbrains.kotlin.gradle.ExperimentalWasmDsl::class)
@@ -50,12 +54,14 @@ kotlin {
         jvmMain {}
 
         jsMain {
+            /**
             benchmark.targets.register("jsDefaultExecutor") {
                 dependsOn(this@jsMain)
             }
             benchmark.targets.register("jsBuiltInExecutor") {
                 dependsOn(this@jsMain)
             }
+             */
         }
 
         wasmJsMain {}
@@ -76,7 +82,7 @@ benchmark {
             iterationTime = 300
             iterationTimeUnit = "ms"
             /** Specifies the number of times the harness should fork*/
-            advanced("jvmForks", 3)
+            advanced("jvmForks", 1)
             advanced("nativeFork", "perBenchmark")
             /** Generates special benchmark bridges to stop inlining optimizations */
             advanced("jsUseBridge", true)
@@ -119,7 +125,8 @@ benchmark {
             iterationTimeUnit = "ms"
             /** Let JMH determine the amount, using the value in the @Fork annotation
              * for the benchmark function or its enclosing class
-             * If not specified by @Fork, it defaults to Defaults.MEASUREMENT_FORKS(5) */
+             * If not specified by @Fork, it defaults to Defaults.MEASUREMENT_FORKS(5)
+             * definedByJmh Default value : 1 */
             advanced("jvmForks", "definedByJmh")
             /** Executes iterations within the same process("perBenchmark")
              * or each iteration in a separate process("perIteration") */
@@ -140,11 +147,14 @@ benchmark {
             jmhVersion = "1.36"
         }
 
+        register("js")
+        /**
         named("jsDefaultExecutor")
         named("jsBuiltInExecutor") {
             this as JsBenchmarkTarget
             jsBenchmarksExecutor = JsBenchmarksExecutor.BuiltIn
         }
+        */
 
         register("wasmJs")
 
