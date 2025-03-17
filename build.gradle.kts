@@ -111,7 +111,7 @@ benchmark {
         register("csv") {
             include("Common")
             exclude("long")
-            iterations = 1
+            iterations = 5
             iterationTime = 300
             iterationTimeUnit = "ms"
             /** Report as csv format */
